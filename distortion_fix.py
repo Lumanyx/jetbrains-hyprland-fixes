@@ -21,6 +21,8 @@ def get_active_window():
     data = subprocess.check_output(["hyprctl", "activewindow", "-j"])
     parsed = json.loads(data.decode("utf-8"))
 
+    if 'class' not in parsed:
+        return None
     # Ignore if no class is present
     if parsed["class"] is None:
         return None
